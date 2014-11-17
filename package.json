@@ -1,0 +1,25 @@
+{
+  "name": "file-db",
+  "version": "1.0.0",
+  "description": "periodically persisting a JSON-able object into a file",
+  "main": "index.js",
+  "scripts": {
+    "install": "coffee -c index.coffee"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fraczak/file-db.git"
+  },
+  "author": "Wojciech Fraczak",
+  "license": "GPL",
+  "bugs": {
+    "url": "https://github.com/fraczak/file-db/issues"
+  },
+  "homepage": "https://github.com/fraczak/file-db",
+  "devDependencies": {
+    "coffee-script": "^1.8.0"
+  },
+  "dependencies": {
+    "lodash": "^2.4.1"
+  }
+}
