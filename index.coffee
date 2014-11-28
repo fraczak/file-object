@@ -20,10 +20,40 @@ module.exports = (obj, {file, saveEverySecs, forceNew } = {}) ->
                 extend obj, JSON.parse fs.readFileSync file, 'utf8'
             catch error
                 console.warn error
-        setInterval ->
+        interval = setInterval ->
             fs.writeFile file, JSON.stringify obj, null, 2, (err) ->
                 console.log err if err
         , saveEverySecs * 1000
-        created_db[file] = obj
+        created_db[file] = {obj,interval}
 
-    return created_db[file]
+    return created_db[file].obj
+
+module.exports.stop = (obj) ->
+    file = find_file obj
+    stop file if file
+
+module.exports.stopAll = ->
+    for file of created_db
+        stop file
+
+module.exports.erase = (x) ->
+    file = find_file obj
+    erase file if file
+
+module.exports.eraseAll = ->
+    for file of created_db
+        erase file
+
+stop = (file) ->
+    {interval} = created_db[file]
+    clearInterval interval
+    delete created_db[file]
+
+erase = (file) ->
+    stop file
+    fs.unlinkSync file
+
+find_file = (obj) ->
+    for file, val of created_db when x is val.obj
+        return file
+    undefined
