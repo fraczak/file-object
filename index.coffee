@@ -34,12 +34,12 @@ writeFile = (file,obj) ->
 module.exports.stop = (obj) ->
     file = find_file obj
     if file
-        writeFile file, created_db[file]
+        writeFile file, created_db[file].obj
         stop file
 
 module.exports.stopAll = ->
     for file of created_db
-        writeFile file, created_db[file]
+        writeFile file, created_db[file].obj
         stop file
 
 module.exports.erase = (obj) ->
