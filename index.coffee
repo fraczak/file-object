@@ -54,6 +54,6 @@ erase = (file) ->
     fs.unlinkSync file
 
 find_file = (obj) ->
-    for file, val of created_db when x is val.obj
+    for file, val of created_db when obj is val.obj
         return file
     undefined
