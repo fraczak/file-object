@@ -21,19 +21,25 @@ module.exports = (obj, {file, saveEverySecs, forceNew } = {}) ->
             catch error
                 console.warn error
         interval = setInterval ->
-            fs.writeFile file, JSON.stringify obj, null, 2, (err) ->
-                console.log err if err
+            writeFile file, obj
         , saveEverySecs * 1000
         created_db[file] = {obj,interval}
 
     return created_db[file].obj
 
+writeFile = (file,obj) ->
+    fs.writeFile file, JSON.stringify obj, null, 2, (err) ->
+        console.log err if err
+
 module.exports.stop = (obj) ->
     file = find_file obj
-    stop file if file
+    if file
+        writeFile file, created_db[file]
+        stop file
 
 module.exports.stopAll = ->
     for file of created_db
+        writeFile file, created_db[file]
         stop file
 
 module.exports.erase = (obj) ->
