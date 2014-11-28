@@ -36,7 +36,7 @@ module.exports.stopAll = ->
     for file of created_db
         stop file
 
-module.exports.erase = (x) ->
+module.exports.erase = (obj) ->
     file = find_file obj
     erase file if file
 
