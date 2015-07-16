@@ -2,21 +2,22 @@ fs = require 'fs'
 ld  = require 'lodash'
 
 created_db = {}
-module.exports = (obj = {}, {file, saveEverySecs, forceNew} = {}) ->
-    file ?= "file_object.json"
+module.exports = ({value, file, saveEverySecs, forceNew} = {}) ->
+    value ?= {}
+    file ?= "json_file_object.json"
     saveEverySecs ?= 5
     forceNew ?= false
 
     if not created_db[file]
         if not forceNew
             try
-                obj = JSON.parse fs.readFileSync file, 'utf8'
+                value = JSON.parse fs.readFileSync file, 'utf8'
             catch error
                 console.warn error
         interval = setInterval ->
-            writeFile file, obj
+            writeFile file, value
         , saveEverySecs * 1000
-        created_db[file] = {obj, interval}
+        created_db[file] = {obj:value, interval}
 
     return created_db[file].obj
 
