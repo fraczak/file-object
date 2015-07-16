@@ -1,29 +1,22 @@
 fs = require 'fs'
-_  = require 'lodash'
-
-extend = (dst, src) ->
-    if _.isArray dst
-        dst.concat src
-    else
-        _.assign dst, src
-    return dst
+ld  = require 'lodash'
 
 created_db = {}
-module.exports = (obj, {file, saveEverySecs, forceNew } = {}) ->
-    file ?= "undefined.json_db"
+module.exports = (obj = {}, {file, saveEverySecs, forceNew} = {}) ->
+    file ?= "file_object.json"
     saveEverySecs ?= 5
     forceNew ?= false
 
     if not created_db[file]
         if not forceNew
             try
-                extend obj, JSON.parse fs.readFileSync file, 'utf8'
+                obj = JSON.parse fs.readFileSync file, 'utf8'
             catch error
                 console.warn error
         interval = setInterval ->
             writeFile file, obj
         , saveEverySecs * 1000
-        created_db[file] = {obj,interval}
+        created_db[file] = {obj, interval}
 
     return created_db[file].obj
 
@@ -57,7 +50,7 @@ stop = (file) ->
 
 erase = (file) ->
     stop file
-    fs.unlinkSync file
+    fs.unlink file
 
 find_file = (obj) ->
     for file, val of created_db when obj is val.obj
