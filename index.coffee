@@ -1,5 +1,5 @@
 fs = require 'fs'
-ld  = require 'lodash'
+ld = require 'lodash'
 
 created_db = {}
 module.exports = ({value, file, saveEverySecs, forceNew} = {}) ->
@@ -22,7 +22,7 @@ module.exports = ({value, file, saveEverySecs, forceNew} = {}) ->
     return created_db[file].obj
 
 writeFile = (file,obj) ->
-    fs.writeFile file, JSON.stringify obj, null, 2, (err) ->
+    fs.writeFile file, JSON.stringify(obj, null, 2), (err) ->
         console.log err if err
 
 module.exports.stop = (obj) ->
