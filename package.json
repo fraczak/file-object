@@ -12,7 +12,7 @@
     "url": "https://github.com/fraczak/file-object.git"
   },
   "author": "Wojciech Fraczak",
-  "license": "GPL",
+  "license": "MIT",
   "devDependencies": {
     "coffeescript": "^2.3.1"
   },
