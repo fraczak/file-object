@@ -1,5 +1,4 @@
 fs = require 'fs'
-ld = require 'lodash'
 
 onWrite = {}
 stopped = false
