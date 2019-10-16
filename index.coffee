@@ -50,9 +50,10 @@ module.exports.eraseAll = ->
       erase file
 
 stop = (file) ->
-  {interval} = created_db[file]
-  clearInterval interval
-  delete created_db[file]
+  record = created_db[file]
+  if record?
+    clearInterval record.interval
+    delete created_db[file]
   delete onWrite[file]
 
 erase = (file) ->

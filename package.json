@@ -1,6 +1,6 @@
 {
   "name": "json-file-object",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "periodically persisting JSON-able objects into files (one per object)",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,6 @@
   "author": "Wojciech Fraczak",
   "license": "MIT",
   "devDependencies": {
-    "coffeescript": "^2.3.1",
-    "lodash": "^4.17.15"
+    "coffeescript": "^2.3.1"
   }
 }
