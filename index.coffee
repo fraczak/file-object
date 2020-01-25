@@ -46,8 +46,9 @@ module.exports.erase = (obj) ->
 module.exports.eraseAll = ->
   stopped = true
   for file of created_db
-    onWrite[file] = ->
-      erase file
+    do (file = file) ->
+      onWrite[file] = ->
+        erase file
 
 stop = (file) ->
   record = created_db[file]
