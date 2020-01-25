@@ -34,8 +34,9 @@ module.exports.stopAll = ->
   return if stopped
   stopped = true
   for file of created_db
-    onWrite[file] = ->
-      stop file
+    do (file = file) ->
+      onWrite[file] = ->
+        stop file
 
 module.exports.erase = (obj) ->
   file = find_file obj
